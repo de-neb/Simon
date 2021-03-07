@@ -70,42 +70,34 @@ function playSound(color) {
 function animatePress(currentColor) {
   $(`#${currentColor}`).addClass("pressed");
   setTimeout(() => $(`#${currentColor}`).removeClass("pressed"), 200);
-  console.log("pressed!");
 }
 
 function checkAnswer(lastIndex) {
-  let rightColor = gamePattern[lastIndex];
-
-  if (rightColor === userClickedPattern[lastIndex]) {
+  if (gamePattern[lastIndex] === userClickedPattern[lastIndex]) {
     console.log("success"); //for checking
     if (gamePattern.length === userClickedPattern.length) {
       setTimeout(nextSequence, 1000);
     }
   } else {
+    let rightColor = gamePattern[gamePattern.length-1];
     /* for checking rightColor */
-    try {
-      $(".game-over").removeClass("dim");
-      $("#right-color span")
-        .text(`${rightColor.toUpperCase()}`)
-        .addClass(`text-color-${rightColor}`);
-    } catch {
-      console.log(`${gamePattern[lastIndex]} is undefined`);
-      console.log(`Last Index: ${userClickedPattern.length - 1}`);
-      console.log(`Last Item in GP : ${gamePattern[gamePattern.length-1]}`)
-    } finally {
-      playSound("wrong");
-      $("#play-again").click(function () {
-        $(".close-t").addClass("top");
-        $(".close-b").addClass("bottom");
-        setTimeout(() => {
-          $("#title-card").addClass("title-card");
-        }, 1000);
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
-      });
-    }
+
+    $(".game-over").removeClass("dim");
+    $("#right-color span")
+      .text(`${rightColor.toUpperCase()}`)
+      .addClass(`text-color-${rightColor}`);
+
+    playSound("wrong");
+    $("#play-again").click(function () {
+      $(".close-t").addClass("top");
+      $(".close-b").addClass("bottom");
+      setTimeout(() => {
+        $("#title-card").addClass("title-card");
+      }, 1000);
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    });
   }
   console.log(gamePattern, userClickedPattern);
-  console.log(rightColor);
 }

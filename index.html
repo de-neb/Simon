@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Simon</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P&family=Ubuntu+Mono"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="default" id="title-card">
+      <h1 class="title">SIMON</h1>
+      <fieldset class="instructions">
+        <legend>How to play?</legend>
+        <ol>
+          <li>
+            Press any button. Simon will give the first signal. Repeat the
+            signal by clicking the same color.
+          </li>
+          <li>
+            Simon will duplicate the first signal and add one. Repeat these two
+            signals by clicking the same colors in order.
+          </li>
+          <li>Simon will duplicate these first two signals and add one.</li>
+          <li>
+            Continue playing as long as you can repeat each sequence of sig-
+            nals correctly.
+          </li>
+          <li>The game is over if you fail to repeat a sequence exactly.</li>
+        </ol>
+      </fieldset>
+      <span id="to-play">PLAY!</span>
+    </div>
+    <div class="default hide-game" id="game-cont">
+      <h1 class="title" id="level-title">Press A Key to Start</h1>
+      <div class="container">
+        <div class="row">
+          <div type="button" id="green" class="btn green"></div>
+
+          <div type="button" id="red" class="btn red"></div>
+        </div>
+
+        <div class="row">
+          <div type="button" id="yellow" class="btn yellow"></div>
+          <div type="button" id="blue" class="btn blue"></div>
+        </div>
+      </div>
+
+      <div class="dim game-over">
+        <h1 class="game-over-text">GAME OVER</h1>
+        <h5 id="right-color">Correct Color: <span></span></h5>
+        <span class="game-over-text" id="play-again">Click to play again</span>
+      </div>
+    </div>
+    <div class="close close-t"></div>
+    <div class="close close-b"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

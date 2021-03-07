@@ -70,6 +70,7 @@ function playSound(color) {
 function animatePress(currentColor) {
   $(`#${currentColor}`).addClass("pressed");
   setTimeout(() => $(`#${currentColor}`).removeClass("pressed"), 200);
+  console.log("pressed!");
 }
 
 function checkAnswer(lastIndex) {
@@ -87,7 +88,11 @@ function checkAnswer(lastIndex) {
       $("#right-color span")
         .text(`${rightColor.toUpperCase()}`)
         .addClass(`text-color-${rightColor}`);
-
+    } catch {
+      console.log(`${gamePattern[lastIndex]} is undefined`);
+      console.log(`Last Index: ${userClickedPattern.length - 1}`);
+      console.log(`Last Item in GP : ${gamePattern[gamePattern.length-1]}`)
+    } finally {
       playSound("wrong");
       $("#play-again").click(function () {
         $(".close-t").addClass("top");
@@ -99,9 +104,6 @@ function checkAnswer(lastIndex) {
           location.reload();
         }, 2000);
       });
-    } catch {
-      console.log(`${rightColor} is undefined`);
-      console.log(`User pattern length: ${userClickedPattern.length}`);
     }
   }
   console.log(gamePattern, userClickedPattern);

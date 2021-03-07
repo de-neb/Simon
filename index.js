@@ -19,8 +19,7 @@ $("#to-play").on("click", function () {
   pressKeyToStart();
 });
 
-
-function pressKeyToStart(){
+function pressKeyToStart() {
   $(document).on("keypress", function (key) {
     if (started) {
       started = false;
@@ -50,10 +49,14 @@ function nextSequence() {
   let randomChosenColor = BUTTONCOLORS[randomNum];
   gamePattern.push(randomChosenColor);
 
-  /* adds flash effect in the random color */
-  $(`#${randomChosenColor}`).addClass("flash");
-  setTimeout(() => $(`#${randomChosenColor}`).removeClass("flash"), 100);
-  playSound(randomChosenColor);
+  /* iterates gamePattern , signals produced are repeated with delay */
+  gamePattern.forEach((color, i) => {
+    setTimeout(() => {
+      $(`#${color}`).addClass("flash");
+      setTimeout(() => $(`#${color}`).removeClass("flash"), 200);
+      playSound(color);
+    }, i * 500); // multiplied to increase delay by 500 for each iteration
+  });
 
   level++;
   $("#level-title").text(`Level ${level}`);
@@ -97,8 +100,8 @@ function checkAnswer(lastIndex) {
         }, 2000);
       });
     } catch {
-      console.log(`${rightColor} is undefined`)
-      console.log(`User pattern length: ${userClickedPattern.length}`)
+      console.log(`${rightColor} is undefined`);
+      console.log(`User pattern length: ${userClickedPattern.length}`);
     }
   }
   console.log(gamePattern, userClickedPattern);

@@ -1,2 +1,2 @@
 # Simon Game
-Creating Simo using JS, html and CSS
+Creating Simon using JS, html and CSS

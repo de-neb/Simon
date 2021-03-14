@@ -1,2 +1,2 @@
-# Simon
-Click the correct colors in the exact sequence
+# Simon Game
+Creating Simo using JS, html and CSS

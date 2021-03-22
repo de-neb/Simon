@@ -5,6 +5,8 @@ let started = true;
 let level = 0;
 let userChosenColor;
 
+
+
 /* game title screen */
 $("#to-play").on("click", function () {
   $(".close-t").addClass("top");
@@ -24,13 +26,15 @@ function pressKeyToStart() {
     if (started) {
       started = false;
       nextSequence();
-      clickingButton();
+      clickingColor();
     }
   });
 }
 
 /* user clicks a color */
-function clickingButton() {
+function clickingColor() {
+  $(".btn").prop("disabled", false)
+
   $(".btn").click(function () {
     userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
@@ -51,12 +55,18 @@ function nextSequence() {
 
   /* iterates gamePattern , signals produced are repeated with delay */
   gamePattern.forEach((color, i) => {
+    $(".btn").prop("disabled", true) //disables button click during color play sequence
     setTimeout(() => {
       $(`#${color}`).addClass("flash");
       setTimeout(() => $(`#${color}`).removeClass("flash"), 200);
       playSound(color);
-    }, i * 500); // multiplied to increase delay by 500 for each iteration
+    }, (i+1) * 500); // multiplied to increase delay by 500 for each iteration
   });
+
+  //enables button click 
+  setTimeout(() => {
+    $(".btn").prop("disabled", false)
+  },(gamePattern.length*500)+1000);
 
   level++;
   $("#level-title").text(`Level ${level}`);
@@ -79,7 +89,7 @@ function checkAnswer(lastIndex) {
       setTimeout(nextSequence, 1000);
     }
   } else {
-    let rightColor = gamePattern[gamePattern.length-1];
+    let rightColor = gamePattern[gamePattern.length - 1];
     /* for checking rightColor */
 
     $(".game-over").removeClass("dim");
